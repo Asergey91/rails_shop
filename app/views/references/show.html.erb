@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Integer:</strong>
+  <%= @reference.integer %>
+</p>
+
+<p>
+  <strong>String:</strong>
+  <%= @reference.string %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @reference.text %>
+</p>
+
+<%= link_to 'Edit', edit_reference_path(@reference) %> |
+<%= link_to 'Back', references_path %>
