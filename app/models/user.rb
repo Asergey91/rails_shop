@@ -6,4 +6,13 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :products, through: :orders
   has_many :reviews
+  
+  
+  
+  def cart_items
+    return self.orders.where(:purchased=>false).count
+  end
+    
+  
+  
 end

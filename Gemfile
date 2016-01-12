@@ -32,6 +32,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # devise for users auth
 gem 'devise'
+gem 'bootstrap-sass'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
