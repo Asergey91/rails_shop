@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
-  def test
-    @products = Product.all
-    @carousel = @products.limit(4)
+  def landing_page
+    @carousel = MainPagePromo.all
+    @latest_products = Product.order(created_at: :desc).limit(4)
+    @best_deals = Product.order(discount: :desc).limit(6)
   end
 end

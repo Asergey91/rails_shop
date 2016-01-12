@@ -1,0 +1,65 @@
+<div class="container-fluid" id="main_page_container">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <%count=0%>
+      <%@carousel.each do |c|%>
+        <li data-target="#myCarousel" data-slide-to="<%=count%>" <%=count == 0 ? "class='active'".html_safe : "" %>></li>
+      <%count=count+1%>
+      <%end%>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <%count=1%>
+      <%@carousel.each do |c|%>
+        <div class="item <%=count == 1 ? "active" : ""%>">
+          <a href='<%=c.link%>'><img src="<%=c.picture%>" alt="<%=c.title%>" id="carousel_item"></a>
+          <div class="carousel-caption">
+            <h2><%=c.title%></h2>
+            <p><%=c.content%></p>
+          </div>
+        </div>
+      <%count=count+1%>
+      <%end%>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+<div class="containter-fluid">
+    <h2 style="margin: 20px;"><span class="label label-success">Latest Products:</span></h2>
+    <%@latest_products.each do |lp|%>
+        <div class="col-md-6 col-xs-12">
+            <div class="thumbnail">
+                <div style='background-image: url("<%=lp.image%>"); background-size: cover; width: 100%; height: 300px;'></div>
+                <h3><%=lp.name%> <%=lp.sale? == true ? '<span class="label label-warning pull-right">'.html_safe+lp.discount.to_s.html_safe+'% OFF</span>'.html_safe : ''%></h3>
+                <blockquote>
+                  <p>Price: <mark>$<%=lp.price%></mark> <button type="button" class="btn btn-default pull-right">View</button></p>
+                  <footer>Average Rating: <mark><%=lp.average_rating%>/10</mark> <button type="button" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="glyphicon glyphicon-plus"></span></button></footer>
+                </blockquote>
+            </div>
+        </div>
+    <%end%>
+    <h2 style="margin: 20px;"><span class="label label-danger">Best Deals:</span></h2>
+    <%@best_deals.each do |lp|%>
+        <div class="col-md-4 col-xs-6">
+            <div class="thumbnail">
+                <div style='background-image: url("<%=lp.image%>"); background-size: cover; width: 100%; height: 200px;'></div>
+                <h3><%=lp.name%> <%=lp.sale? == true ? '<span class="label label-warning pull-right">'.html_safe+lp.discount.to_s.html_safe+'% OFF</span>'.html_safe : ''%></h3>
+                <blockquote>
+                  <p>Price: <%= lp.sale? == true ? "<del>$".html_safe+(lp.price+(lp.price*lp.discount*0.001)).round(2).to_s.html_safe+"</del>".html_safe : ""%><mark>$<%=lp.price%></mark> <button type="button" class="btn btn-default pull-right">View</button></p>
+                  <footer>Average Rating: <mark><%=lp.average_rating%>/10</mark> <button type="button" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="glyphicon glyphicon-plus"></span></button></footer>
+                </blockquote>
+            </div>
+        </div>
+    <%end%>
+</div>
