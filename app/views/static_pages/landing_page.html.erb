@@ -41,10 +41,13 @@
         <div class="col-md-6 col-xs-12">
             <div class="thumbnail">
                 <div style='background-image: url("<%=lp.image%>"); background-size: cover; width: 100%; height: 300px;'></div>
-                <h3><%=lp.name%> <%=lp.sale? == true ? '<span class="label label-warning pull-right">'.html_safe+lp.discount.to_s.html_safe+'% OFF</span>'.html_safe : ''%></h3>
+                <h3><%=lp.name%> <%=lp.sale? == true ? '<span class="label label-warning pull-right" id="discount_notice">'.html_safe+lp.discount.to_s.html_safe+'% OFF</span>'.html_safe : ''%></h3>
                 <blockquote>
-                  <p>Price: <mark>$<%=lp.price%></mark> <button type="button" class="btn btn-default pull-right">View</button></p>
-                  <footer>Average Rating: <mark><%=lp.average_rating%>/10</mark> <button type="button" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="glyphicon glyphicon-plus"></span></button></footer>
+                  <p>Price: <%= lp.sale? == true ? "<del>$".html_safe+(lp.price+(lp.price*lp.discount*0.01)).round(2).to_s.html_safe+"</del>".html_safe : ""%><mark>$<%=lp.price%></mark> <a class="btn btn-default pull-right" href='<%=product_path(lp)%>'>View</a></p>
+                  <footer>
+                    Average Rating: <mark><%=lp.average_rating%>/10</mark>
+                    <%= user_signed_in? == true ? link_to('<span class="glyphicon glyphicon-shopping-cart"></span> <span class="glyphicon glyphicon-plus"></span>'.html_safe, add_to_cart_path(:product_id => lp.id), method: "post", class: 'btn btn-success pull-right') : ''%>
+                  </footer>
                 </blockquote>
             </div>
         </div>
@@ -54,10 +57,13 @@
         <div class="col-md-4 col-xs-6">
             <div class="thumbnail">
                 <div style='background-image: url("<%=lp.image%>"); background-size: cover; width: 100%; height: 200px;'></div>
-                <h3><%=lp.name%> <%=lp.sale? == true ? '<span class="label label-warning pull-right">'.html_safe+lp.discount.to_s.html_safe+'% OFF</span>'.html_safe : ''%></h3>
+                <h3><%=lp.name%> <%=lp.sale? == true ? '<span class="label label-warning pull-right" id="discount_notice">'.html_safe+lp.discount.to_s.html_safe+'% OFF</span>'.html_safe : ''%></h3>
                 <blockquote>
-                  <p>Price: <%= lp.sale? == true ? "<del>$".html_safe+(lp.price+(lp.price*lp.discount*0.001)).round(2).to_s.html_safe+"</del>".html_safe : ""%><mark>$<%=lp.price%></mark> <button type="button" class="btn btn-default pull-right">View</button></p>
-                  <footer>Average Rating: <mark><%=lp.average_rating%>/10</mark> <button type="button" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="glyphicon glyphicon-plus"></span></button></footer>
+                  <p>Price: <%= lp.sale? == true ? "<del>$".html_safe+(lp.price+(lp.price*lp.discount*0.01)).round(2).to_s.html_safe+"</del>".html_safe : ""%><mark>$<%=lp.price%></mark> <a class="btn btn-default pull-right" href='<%=product_path(lp)%>'>View</a></p>
+                  <footer>
+                    Average Rating: <mark><%=lp.average_rating%>/10</mark>
+                    <%= user_signed_in? == true ? link_to('<span class="glyphicon glyphicon-shopping-cart"></span> <span class="glyphicon glyphicon-plus"></span>'.html_safe, add_to_cart_path(:product_id => lp.id), method: "post", class: 'btn btn-danger pull-right') : ''%>
+                  </footer>
                 </blockquote>
             </div>
         </div>

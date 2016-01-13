@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
+
   devise_for :users
+  
+  get '/reviews/for_product_new', to: "reviews#new", as: 'for_product_new'
+  resources :reviews
+  
+  resources :products
+  
+  post '/add_to_cart', to: 'orders#add_to_cart', as: 'add_to_cart'
+  
   resources :references
+  
+  
   root 'static_pages#landing_page'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
