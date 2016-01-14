@@ -7,7 +7,9 @@ class User < ActiveRecord::Base
   has_many :products, through: :orders
   has_many :reviews
   
-  
+  def is_admin?
+    return self.permition==2 ? true : false
+  end
   
   def cart_items
     return self.orders.where(:purchased=>false).count

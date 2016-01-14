@@ -37,6 +37,7 @@
       <h3>From: <%=User.find(r.user_id).name%></h3>
       <p><%=r.content%></p>
       <h4>Rating: <mark><%=r.rating%>/10</mark></h4>
+      <%= (user_signed_in? == true ? (current_user.is_admin? == true ? link_to('Delete Review'.html_safe, review_path(:id => r.id), method: "delete", class: 'btn btn-danger')+'</li><br>'.html_safe : '') : '')%>
     <%end%>
 </div>
 

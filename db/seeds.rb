@@ -13,7 +13,15 @@ for a in 1..100 do
    user.password = "password#{a}"
    user.password_confirmation  = "password#{a}"
    user.save!
+   user.permition = 1
 end
+user=User.new
+user.name = "admin"
+user.email = "admin@example.com"
+user.password = "administrator"
+user.password_confirmation  = "administrator"
+user.permition = 2
+user.save!
 for a in 1..100 do
     product = Product.new
     product.name = "product#{a}"
@@ -21,7 +29,7 @@ for a in 1..100 do
     product.discount = [0, 0, 0, 10+rand(40)].sample
     product.image = "http://images5.fanpop.com/image/photos/30200000/dark-darkness-30206274-371-500.jpg"
     product.description = "
-    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque pretium porttitor quam, euismod tincidunt tortor luctus quis. Sed malesuada ac orci eu molestie. In fermentum ex enim, vel vulputate lacus faucibus sit amet. Aenean venenatis, velit at semper iaculis, nisl mauris aliquet sem, a mollis nulla ex dignissim nunc. Maecenas dignissim libero lectus, eget euismod ipsum malesuada cursus. Vestibulum in lorem in ante tristique feugiat. Nulla aliquet dui sodales dignissim bibendum. Quisque nec diam leo. Suspendisse eget velit elit. Etiam vitae hendrerit tellus. Vivamus eleifend diam eu nisi finibus imperdiet.
+    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque pretium porttitor quam, euismod tincidunt tortor luctus quis. Sed malesuada ac orci eu molestie. In fermentum ex enim, vel vulputate lacus faucibus sit amet. Aenean venenatis, velit at semper iaculis, nisl mauris aliquet sem, a mollis nulla ex dignissim nunc. Maecenas dignissim libero lectus, eget euismod ipsum malesuada cursus. Vestibulum in lorem in ante tristique feugiat. Nulla aliquet dui sodales dignissim bibendum. Quisque nec diam leo. Suspendisse eget velit elit. Etiam vitae hendrerit tellus. Vivamus eleifend diam eu nisi finibus imperdiet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque pretium porttitor quam, euismod tincidunt tortor luctus quis. Sed malesuada ac orci eu molestie. In fermentum ex enim, vel vulputate lacus faucibus sit amet. Aenean venenatis, velit at semper iaculis, nisl mauris aliquet sem, a mollis nulla ex dignissim nunc. Maecenas dignissim libero lectus, eget euismod ipsum malesuada cursus. Vestibulum in lorem in ante tristique feugiat. Nulla aliquet dui sodales dignissim bibendum. Quisque nec diam leo. Suspendisse eget velit elit. Etiam vitae hendrerit tellus. Vivamus eleifend diam eu nisi finibus imperdiet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque pretium porttitor quam, euismod tincidunt tortor luctus quis. Sed malesuada ac orci eu molestie. In fermentum ex enim, vel vulputate lacus faucibus sit amet. Aenean venenatis, velit at semper iaculis, nisl mauris aliquet sem, a mollis nulla ex dignissim nunc. Maecenas dignissim libero lectus, eget euismod ipsum malesuada cursus. Vestibulum in lorem in ante tristique feugiat. Nulla aliquet dui sodales dignissim bibendum. Quisque nec diam leo. Suspendisse eget velit elit. Etiam vitae hendrerit tellus. Vivamus eleifend diam eu nisi finibus imperdiet.
     "
     product.sub_category_id = 1+rand(24)
     product.save!
@@ -43,9 +51,9 @@ for a in 1..500 do
     Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque pretium porttitor quam, euismod tincidunt tortor luctus quis. Sed malesuada ac orci eu molestie. In fermentum ex enim, vel vulputate lacus faucibus sit amet. Aenean venenatis, velit at semper iaculis, nisl mauris aliquet sem, a mollis nulla ex dignissim nunc. Maecenas dignissim libero lectus, eget euismod ipsum malesuada cursus. Vestibulum in lorem in ante tristique feugiat. Nulla aliquet dui sodales dignissim bibendum. Quisque nec diam leo. Suspendisse eget velit elit. Etiam vitae hendrerit tellus. Vivamus eleifend diam eu nisi finibus imperdiet.
     "
     review.rating = rand(10)
-    review.user_id = (a/5).ceil
-    review.product_id = (a/5).ceil
-    review.save!
+    review.user_id = a/5.ceil
+    review.product_id = a/5.ceil
+    review.save!(validate: false)
 end
 for a in 1..500 do
     order = Order.new
