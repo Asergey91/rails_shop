@@ -8,7 +8,7 @@ class Product < ActiveRecord::Base
         self.reviews.each do |r|
             av = av+r.rating
         end
-        return (av/self.reviews.count).to_i
+        return (av+5/(self.reviews.count+1)).to_i
     end
     def sale?
         if self.discount>0
