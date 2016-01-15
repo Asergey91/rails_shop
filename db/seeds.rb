@@ -12,8 +12,8 @@ for a in 1..100 do
    user.email = "test#{a}@example.com"
    user.password = "password#{a}"
    user.password_confirmation  = "password#{a}"
-   user.save!
    user.permition = 1
+   user.save!
 end
 user=User.new
 user.name = "admin"

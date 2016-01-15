@@ -5,8 +5,12 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    Review.create!(review_params)
-    redirect_to product_path(Product.find(review_params[:product_id]))
+    if user_signed_in?
+      Review.create!(review_params)
+      redirect_to product_path(Product.find(review_params[:product_id]))
+    else
+      redirect_to product_path(Product.find(review_params[:product_id]))
+    end
   end
   def destroy
     @review=Review.find(params[:id])

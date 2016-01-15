@@ -5,10 +5,10 @@
       <div class="col-xs-7 col-md-4">
         <div class=thumbnail style="margin-bottom: 0;">
           <ul style="margin-bottom: 14px; margin-top: 10px">
-            <li>Price: <%= @product.sale? == true ? "<del>$".html_safe+(@product.price+(@product.price*@product.discount*0.01)).round(2).to_s.html_safe+"</del>".html_safe : ""%><mark>$<%=@product.price%></mark></li><br>
+            <li>Price: <%= @product.sale? == true ? "<del>$".html_safe+(@product.price+(@product.price*@product.discount*0.01)).round(2).to_s.html_safe+"</del>".html_safe : ""%><mark><%=number_to_currency(@product.price)%></mark></li><br>
             <%=@product.sale? == true ? '<li>Discount: '.html_safe+@product.discount.to_s.html_safe+'%</li><br>'.html_safe : ''%>
             <li>Average Rating: <mark><%=@product.average_rating%>/10</mark></li><br>
-            <%= user_signed_in? == true ? '<li>'.html_safe+link_to('<span class="glyphicon glyphicon-shopping-cart"></span> <span class="glyphicon glyphicon-plus"></span>'.html_safe, add_to_cart_path(:product_id => @product.id), method: "post", class: 'btn btn-default')+'</li><br>'.html_safe : '<li class="bg-danger">Please log-in to purchase</li>'.html_safe%>
+            <%= user_signed_in? == true ? '<li>'.html_safe+link_to('<span class="glyphicon glyphicon-shopping-cart"></span> <span class="glyphicon glyphicon-plus"></span>'.html_safe, add_to_cart_path(:product_id => @product.id), method: "post", class: 'btn btn-default')+'</li><br>'.html_safe : '<li class="bg-danger">Please log-in to purchase / review</li>'.html_safe%>
             <%= user_signed_in? == true ? '<li>'.html_safe+link_to('Leave A Review'.html_safe, for_product_new_path(:product_id=>@product.id), method: "get", class: "btn btn-warning")+'</li>'.html_safe : ''%>
           </ul>
         </div>
@@ -32,7 +32,7 @@
     </div>
   </div>
 <div class="container">
-  <%if @reviews.count > 0%>
+  <%if @product.reviewed?%>
     <h2>User Reviews:</h2>
     <%@reviews.each do |r|%>
       <h3>From: <%=User.find(r.user_id).name%></h3>
