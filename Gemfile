@@ -34,7 +34,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 # bootstrap for boostrap
 gem 'bootstrap-sass'
-
+#stripe payments
+gem 'stripe'
 group :development, :test do
   gem "factory_girl_rails", "~> 4.0"
   gem 'rspec-rails', '~> 3.0'
