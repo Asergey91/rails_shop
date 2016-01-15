@@ -38,8 +38,10 @@ gem 'bootstrap-sass'
 group :development, :test do
   gem "factory_girl_rails", "~> 4.0"
   gem 'rspec-rails', '~> 3.0'
-  
-  
+  gem 'guard'
+  gem 'guard-rspec', require: false
+  gem 'spork-rails'
+  gem 'guard-spork'
   
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
