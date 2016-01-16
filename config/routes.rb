@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  post 'payments/create', to: 'payments#create'
+  get '/cart', to: 'carts#index', as: 'cart'
+  delete '/cart', to: 'carts#destroy', as: 'delete_cart_item'
 
   devise_for :users
   
