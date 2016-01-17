@@ -1,7 +1,23 @@
 class ProductsController < ApplicationController
+  protect_from_forgery
   before_action :set_product, only: [:show]
+  skip_before_action :verify_authenticity_token, if: :json_request?
+  respond_to :json, :html
+  
   def show
   end
+  
+  def index
+    @products = Product.all.to_json
+    render :json => @products
+  end
+  
+  protected
+
+    def json_request?
+      request.format.json?
+    end
+
   
   private
     # Use callbacks to share common setup or constraints between actions.

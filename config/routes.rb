@@ -3,8 +3,10 @@ Rails.application.routes.draw do
   get '/testing_stuff', to: 'static_pages#testing_stuff'
   
   post 'payments/create', to: 'payments#create'
+  
   get '/cart', to: 'carts#index', as: 'cart'
   delete '/cart', to: 'carts#destroy', as: 'delete_cart_item'
+  post '/add_to_cart', to: 'orders#add_to_cart', as: 'add_to_cart'
 
   devise_for :users
   
@@ -12,8 +14,6 @@ Rails.application.routes.draw do
   resources :reviews
   
   resources :products
-  
-  post '/add_to_cart', to: 'orders#add_to_cart', as: 'add_to_cart'
   
   resources :references
   

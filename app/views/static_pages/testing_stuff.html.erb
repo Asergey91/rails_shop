@@ -1,0 +1,30 @@
+<div ng-app="myApp">
+    <div ng-controller="ProductCtrl">
+        <p class="product_name"><h1>JSON RESPONCE:</h1> {{ products }}</p>
+    </div>
+</div>
+<script>
+  
+  var myApp = angular.module('myApp', []);
+  
+  myApp.controller('ProductCtrl', ['$scope', '$http', function ($scope, $http) {
+
+    $scope.products = {};
+  
+    $http({
+      method: 'GET',
+      url: '/products'
+    })
+    .success(function (data, status, headers, config) {
+      // See here, we are now assigning this username
+      // to our existing model!
+      console.log(data);
+      $scope.products = data
+      
+    })
+    .error(function (data, status, headers, config) {
+      // something went wrong :(
+    });
+  }]);
+  
+</script>
