@@ -46,7 +46,7 @@
                   <p>Price: <%= lp.sale? == true ? "<del>".html_safe+number_to_currency((lp.price+(lp.price*lp.discount*0.01))).html_safe+"</del>".html_safe : ""%><mark><%=number_to_currency(lp.price)%></mark> <a class="btn btn-default pull-right" href='<%=product_path(lp)%>'>View</a></p>
                   <footer>
                     Average Rating: <mark><%=lp.average_rating%>/10</mark>
-                    <%= user_signed_in? == true ? link_to('<span class="glyphicon glyphicon-shopping-cart"></span> <span class="glyphicon glyphicon-plus"></span>'.html_safe, add_to_cart_path(:product_id => lp.id), method: "post", class: 'btn btn-success pull-right') : ''%>
+                    <%= user_signed_in? == true ? link_to('<span class="glyphicon glyphicon-shopping-cart"></span> <span class="glyphicon glyphicon-plus"></span>'.html_safe, add_to_cart_path(:product_id => lp.id), method: "post", class: 'btn btn-success pull-right', remote: true) : ''%>
                   </footer>
                 </blockquote>
             </div>
@@ -62,10 +62,14 @@
                   <p>Price: <%= lp.sale? == true ? "<del>".html_safe+number_to_currency((lp.price+(lp.price*lp.discount*0.01))).html_safe+"</del>".html_safe : ""%><mark><%=number_to_currency(lp.price)%></mark> <a class="btn btn-default pull-right" href='<%=product_path(lp)%>'>View</a></p>
                   <footer>
                     Average Rating: <mark><%=lp.average_rating%>/10</mark>
-                    <%= user_signed_in? == true ? link_to('<span class="glyphicon glyphicon-shopping-cart"></span> <span class="glyphicon glyphicon-plus"></span>'.html_safe, add_to_cart_path(:product_id => lp.id), method: "post", class: 'btn btn-danger pull-right') : ''%>
+                    <%= user_signed_in? == true ? link_to('<span class="glyphicon glyphicon-shopping-cart"></span> <span class="glyphicon glyphicon-plus"></span>'.html_safe, add_to_cart_path(:product_id => lp.id), method: "post", class: 'btn btn-danger pull-right', remote: true) : ''%>
                   </footer>
                 </blockquote>
             </div>
         </div>
     <%end%>
 </div>
+
+<script>
+  
+</script>

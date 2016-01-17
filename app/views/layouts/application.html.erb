@@ -35,7 +35,7 @@
       <ul class="nav navbar-nav navbar-right">
         <%if user_signed_in?%>
           <li><%=link_to '<span class="glyphicon glyphicon-user"></span> <b>'.html_safe+current_user.name.html_safe+'</b>'.html_safe, root_path%></li>
-          <li <%=request.env['PATH_INFO'] == cart_path ? 'class="active"'.html_safe : ''%>><%=link_to '<span class="glyphicon glyphicon-shopping-cart"></span> Cart ('.html_safe+current_user.cart_items.to_s.html_safe+')'.html_safe, '/cart'%></li>
+          <li<%=request.env['PATH_INFO'] == cart_path ? ' class="active"'.html_safe : ''%>><%=link_to '<span class="glyphicon glyphicon-shopping-cart"></span> Cart (<span id="cart_items">'.html_safe+current_user.cart_items.to_s.html_safe+'</span>)'.html_safe, '/cart'%></li>
           <li><%=link_to '<span class="glyphicon glyphicon-log-out"></span> Logout'.html_safe, destroy_user_session_path, method: :delete%></li>
         <%else%>
           <li><%=link_to '<span class="glyphicon glyphicon-user"></span> Register'.html_safe, new_user_registration_path%></li>

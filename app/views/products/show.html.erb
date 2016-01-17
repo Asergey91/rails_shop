@@ -8,7 +8,7 @@
             <li>Price: <%= @product.sale? == true ? "<del>".html_safe+number_to_currency((@product.price+(@product.price*@product.discount*0.01)).round(2)).html_safe+"</del>".html_safe : ""%><mark><%=number_to_currency(@product.price)%></mark></li><br>
             <%=@product.sale? == true ? '<li>Discount: '.html_safe+@product.discount.to_s.html_safe+'%</li><br>'.html_safe : ''%>
             <li>Average Rating: <mark><%=@product.average_rating%>/10</mark></li><br>
-            <%= user_signed_in? == true ? '<li>'.html_safe+link_to('<span class="glyphicon glyphicon-shopping-cart"></span> <span class="glyphicon glyphicon-plus"></span>'.html_safe, add_to_cart_path(:product_id => @product.id), method: "post", class: 'btn btn-default')+'</li><br>'.html_safe : '<li><span class="bg-danger">Please log-in to purchase / review</span></li>'.html_safe%>
+            <%= user_signed_in? == true ? '<li>'.html_safe+link_to('<span class="glyphicon glyphicon-shopping-cart"></span> <span class="glyphicon glyphicon-plus"></span>'.html_safe, add_to_cart_path(:product_id => @product.id), method: "post", class: 'btn btn-default', remote: true)+'</li><br>'.html_safe : '<li><span class="bg-danger">Please log-in to purchase / review</span></li>'.html_safe%>
             <%= user_signed_in? == true ? '<li>'.html_safe+link_to('Leave A Review'.html_safe, for_product_new_path(:product_id=>@product.id), method: "get", class: "btn btn-warning")+'</li>'.html_safe : ''%>
           </ul>
         </div>
@@ -18,13 +18,15 @@
       <br>
       <div class='row'>
         <div class = 'col-xs-12' >
-          <div class = 'thumbnail'>
+          <div class = 'thumbnail' id='image_selector'>
             <hr>
-            <div style="height: 50px; width: 50px; background-size: cover; background-image: url('<%=@product.image%>'); display: inline-block"></div>
-            <div style="height: 50px; width: 50px; background-size: cover; background-image: url('<%=@product.image%>'); display: inline-block"></div>
-            <div style="height: 50px; width: 50px; background-size: cover; background-image: url('<%=@product.image%>'); display: inline-block"></div><br>
+            <div style="height: 50px; width: 50px; background-size: cover; background-image: url(<%=@product.image%>); display: inline-block; cursor: pointer;"></div>
+            <%@product.get_other_images.each do |k, i|%>
+              <div style="height: 50px; width: 50px; background-size: cover; background-image: url(<%=i%>); display: inline-block; cursor: pointer;"></div>
+            <%end%>
+            <br>
             <hr>
-            <img src='<%=@product.image%>' tyle="height: auto; width: 100%;">
+            <img src='<%=@product.image%>' style="height: 500px; width: auto;">
             <hr>
           </div>
         </div>
@@ -45,3 +47,10 @@
   <%end%>
 </div>
 
+<script>
+  $(document).on('ready page:load', function(){
+    $('#image_selector div').click(function(){
+        $('#image_selector img').attr('src', $(this).css('background-image').replace('url("','').replace('")',''));
+    });
+  });
+</script>

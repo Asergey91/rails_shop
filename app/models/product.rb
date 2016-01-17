@@ -34,4 +34,11 @@ class Product < ActiveRecord::Base
             return false
         end
     end
+    def add_other_images(image_hash)
+        self.update(other_images: image_hash.to_json)
+    end
+    
+    def get_other_images
+        return JSON.parse(self.other_images)
+    end
 end
