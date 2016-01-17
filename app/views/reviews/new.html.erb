@@ -4,6 +4,12 @@
     <%= form_for @review do |f| %>
       <div class = 'form-group'>
         <div class="field">
+          <%= f.label :name %><br>
+          <%= f.text_field :name, class: 'form-group', autofocus: true, style: 'width: 300px; resize: none;'%>
+        </div>
+      </div>
+      <div class = 'form-group'>
+        <div class="field">
           <%= f.label :content %><br>
           <%= f.text_area :content, class: 'form-group', style: 'width: 100%; height: 300px;  resize: none;' %>
         </div>

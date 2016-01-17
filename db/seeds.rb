@@ -8,7 +8,6 @@
 
 for a in 1..100 do
    user=User.new
-   user.name = "user#{a}_name"
    user.email = "test#{a}@example.com"
    user.password = "password#{a}"
    user.password_confirmation  = "password#{a}"
@@ -48,6 +47,7 @@ for a in 1..25 do
 end
 for a in 1..500 do
     review = Review.new
+    review.name = "user#{a}_name"
     review.content = "
     Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque pretium porttitor quam, euismod tincidunt tortor luctus quis. Sed malesuada ac orci eu molestie. In fermentum ex enim, vel vulputate lacus faucibus sit amet. Aenean venenatis, velit at semper iaculis, nisl mauris aliquet sem, a mollis nulla ex dignissim nunc. Maecenas dignissim libero lectus, eget euismod ipsum malesuada cursus. Vestibulum in lorem in ante tristique feugiat. Nulla aliquet dui sodales dignissim bibendum. Quisque nec diam leo. Suspendisse eget velit elit. Etiam vitae hendrerit tellus. Vivamus eleifend diam eu nisi finibus imperdiet.
     "
