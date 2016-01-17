@@ -34,7 +34,7 @@
       </form>
       <ul class="nav navbar-nav navbar-right">
         <%if user_signed_in?%>
-          <li><a id='user_email'><span class="glyphicon glyphicon-user"></span> <b> <%=current_user.email.to_s%></b></a></li>
+          <li<%=request.env['PATH_INFO'] == '/users/edit' ? ' class="active"'.html_safe : ''%>><%=link_to '<span class="glyphicon glyphicon-user"></span> '.html_safe+current_user.email.to_s.html_safe, '/users/edit'%></li>
           <li<%=request.env['PATH_INFO'] == cart_path ? ' class="active"'.html_safe : ''%>><%=link_to '<span class="glyphicon glyphicon-shopping-cart"></span> Cart (<span id="cart_items">'.html_safe+current_user.cart_items.to_s.html_safe+'</span>)'.html_safe, '/cart'%></li>
           <li><%=link_to '<span class="glyphicon glyphicon-log-out"></span> Logout'.html_safe, destroy_user_session_path, method: :delete%></li>
         <%else%>

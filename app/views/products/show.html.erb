@@ -1,9 +1,9 @@
-<div class="jumbotron">
+<div class="jumbotron" style='padding-top: 20px;'>
   <div class="container">
-    <h2><%=@product.name%></h2>
+    <h2><%=@product.name%>:</h2><br>
       <div class='row'>
-      <div class="col-xs-7 col-md-4">
-        <div class=thumbnail style="margin-bottom: 0;">
+      <div class="col-xs-7 col-md-4" style="padding-bottom: 5px; padding-right: 20px">
+        <div class='thumbnail' style="margin-bottom: 0px;">
           <ul style="margin-bottom: 14px; margin-top: 10px">
             <li>Price: <%= @product.sale? == true ? "<del>".html_safe+number_to_currency((@product.price+(@product.price*@product.discount*0.01)).round(2)).html_safe+"</del>".html_safe : ""%><mark><%=number_to_currency(@product.price)%></mark></li><br>
             <%=@product.sale? == true ? '<li>Discount: '.html_safe+@product.discount.to_s.html_safe+'%</li><br>'.html_safe : ''%>
@@ -20,9 +20,9 @@
         <div class = 'col-xs-12' >
           <div class = 'thumbnail' id='image_selector'>
             <hr>
-            <div style="height: 50px; width: 50px; background-size: cover; background-image: url(<%=@product.image%>); display: inline-block; cursor: pointer;"></div>
+            <div style="height: 50px; width: 50px; background-size: cover; background-image: url(<%=@product.image%>); display: inline-block; cursor: pointer;" class='active'></div>
             <%@product.get_other_images.each do |k, i|%>
-              <div style="height: 50px; width: 50px; background-size: cover; background-image: url(<%=i%>); display: inline-block; cursor: pointer;"></div>
+              <div style="height: 50px; width: 50px; background-size: cover; background-image: url(<%=i%>); display: inline-block; cursor: pointer; opacity: 0.5;"></div>
             <%end%>
             <br>
             <hr>
@@ -49,8 +49,19 @@
 
 <script>
   $(document).on('ready page:load', function(){
+    $('#image_selector div').hover(function(){
+      $(this).css('opacity', '1');
+    }, function(){
+      if ($(this).attr('class') != 'active'){
+        $(this).css('opacity', '0.5');
+      }
+    });
     $('#image_selector div').click(function(){
         $('#image_selector img').attr('src', $(this).css('background-image').replace('url("','').replace('")',''));
+        $('#image_selector div').css('opacity', '0.5');
+        $(this).css('opacity', '1');
+        $('#image_selector div').attr('class', '');
+        $(this).attr('class', 'active');
     });
   });
 </script>

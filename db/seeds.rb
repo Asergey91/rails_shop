@@ -23,7 +23,7 @@ user.permition = 2
 user.save!
 for a in 1..100 do
     product = Product.new
-    product.name = "product#{a}"
+    product.name = "Product#{a}"
     product.price = [8+rand(500)+rand, 8+rand(200)+rand, 8+rand(100)+rand, 8+rand(50)+rand, 8+rand(990)+rand].sample.round(2)
     product.discount = [0, 0, 0, 10+rand(40)].sample
     product.image = "http://images5.fanpop.com/image/photos/30200000/dark-darkness-30206274-371-500.jpg"
