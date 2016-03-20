@@ -12,7 +12,7 @@
     $scope.products = {};
   
     $http({
-      method: 'GET',
+      method: 'JSONP',
       url: '/products'
     })
     .success(function (data, status, headers, config) {

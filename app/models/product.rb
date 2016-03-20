@@ -1,4 +1,5 @@
 class Product < ActiveRecord::Base
+    
     #RELATIONS
     has_many :orders
     has_many :users, through: :orders

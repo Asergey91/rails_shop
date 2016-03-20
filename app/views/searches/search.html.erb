@@ -1,0 +1,20 @@
+<div class="containter-fluid">
+  <h2 style="margin: 20px;"><span class="label label-success">Search Results:</span></h2>
+  <%cache @results do%>
+    <%@results.each do |lp|%>
+        <div class="col-md-6 col-xs-12">
+            <div class="thumbnail">
+                <div style='background-image: url("<%=lp.image%>"); background-size: cover; width: 100%; height: 300px;'></div>
+                <h3><%=lp.name%> <%=lp.sale? == true ? '<span class="label label-warning pull-right" id="discount_notice">'.html_safe+lp.discount.to_s.html_safe+'% OFF</span>'.html_safe : ''%></h3>
+                <blockquote>
+                  <p>Price: <%= lp.sale? == true ? "<del>".html_safe+number_to_currency((lp.price+(lp.price*lp.discount*0.01))).html_safe+"</del>".html_safe : ""%><mark><%=number_to_currency(lp.price)%></mark> <a class="btn btn-default pull-right" href='<%=product_path(lp)%>'>View</a></p>
+                  <footer>
+                    Average Rating: <mark><%=lp.average_rating%>/10</mark>
+                    <%= user_signed_in? == true ? link_to('<span class="glyphicon glyphicon-shopping-cart"></span> <span class="glyphicon glyphicon-plus"></span>'.html_safe, add_to_cart_path(:product_id => lp.id), method: "post", class: 'btn btn-success pull-right', remote: true) : ''%>
+                  </footer>
+                </blockquote>
+            </div>
+        </div>
+    <%end%>
+  <%end%>
+</div>

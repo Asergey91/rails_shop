@@ -38,6 +38,7 @@ gem 'bootstrap-sass'
 gem 'stripe'
 gem 'angularjs-rails'
 gem 'redis-rails'
+
 group :development, :test do
   gem "factory_girl_rails", "~> 4.0"
   gem 'rspec-rails', '~> 3.0'

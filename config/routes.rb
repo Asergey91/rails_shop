@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  post '/search', to: 'searches#search'
+  
   get '/testing_stuff', to: 'static_pages#testing_stuff'
   
   post 'payments/create', to: 'payments#create'

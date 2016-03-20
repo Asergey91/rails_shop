@@ -8,8 +8,10 @@ class ProductsController < ApplicationController
   end
   
   def index
-    @products = Product.all.to_json
-    render :json => @products
+    @products = Product.all
+    if json_request?
+      render :json => @products.to_json
+    end
   end
   
   protected
